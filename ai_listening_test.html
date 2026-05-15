@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A.I. — Humanity's Final Invention? Listening Test</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #0d0d1a; min-height: 100vh; padding: 2rem 1rem; }
+.wrap { font-family: 'Nunito', sans-serif; max-width: 720px; margin: 0 auto; padding-bottom: 3rem; }
+.hero { background: #1a1a2e; border-radius: 16px; padding: 2rem 1.75rem 1.75rem; margin-bottom: 2rem; border: 2px solid #ff6b35; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -40px; right: -40px; width: 160px; height: 160px; border-radius: 50%; background: #ff6b35; opacity: 0.08; }
+.hero h1 { font-size: 24px; font-weight: 800; color: #ff6b35; margin-bottom: 6px; }
+.hero p { font-size: 14px; color: #a0a8c0; line-height: 1.6; }
+.watch-all { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; background: #ff6b35; color: #fff; border-radius: 50px; font-size: 14px; font-weight: 700; text-decoration: none; margin-top: 1rem; }
+.watch-all:hover { background: #e55a26; }
+.nav-link { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: #2e2e4a; color: #a0a8c0; border-radius: 50px; font-size: 13px; font-weight: 700; text-decoration: none; margin-top: 0.75rem; margin-left: 0.5rem; border: 1px solid #3e3e6e; }
+.nav-link:hover { background: #3e3e5e; }
+.section-header { display: flex; align-items: center; gap: 10px; margin: 2rem 0 1rem; }
+.section-badge { background: #ffd700; color: #1a1a2e; font-size: 11px; font-weight: 800; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.section-badge.blue { background: #4fc3f7; color: #0d2033; }
+.section-line { flex: 1; height: 1.5px; background: #2e2e4a; }
+.section-desc { font-size: 13px; color: #6b7280; margin-bottom: 1.5rem; }
+.q-block { margin-bottom: 1.25rem; }
+.q-card { background: #1a1a2e; border: 1.5px solid #2e2e4a; border-radius: 14px; padding: 1.25rem 1.25rem 1rem; }
+.q-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 1rem; }
+.q-num { font-size: 11px; color: #ff6b35; font-weight: 800; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+.q-text { font-size: 14px; color: #e8eaf0; line-height: 1.6; font-weight: 600; flex: 1; }
+
+
+.options { display: flex; flex-direction: column; gap: 7px; }
+.opt { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border: 1.5px solid #2e2e4a; border-radius: 10px; background: #12122a; cursor: pointer; font-size: 13px; text-align: left; width: 100%; font-family: 'Nunito', sans-serif; font-weight: 600; }
+.opt:hover:not([disabled]) { border-color: #ff6b35; background: #1e1e3a; }
+.opt-ltr { width: 24px; height: 24px; min-width: 24px; border-radius: 6px; font-size: 11px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+.opt-txt { flex: 1; }
+.tfng-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.topt { padding: 8px 18px; border-radius: 50px; border: 1.5px solid #2e2e4a; background: #12122a; cursor: pointer; font-size: 13px; font-weight: 700; font-family: 'Nunito', sans-serif; }
+.submit-row { margin-top: 2rem; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.submit-btn { padding: 12px 32px; border-radius: 50px; border: none; background: #ffd700; cursor: pointer; font-size: 15px; font-weight: 800; color: #1a1a2e; font-family: 'Nunito', sans-serif; }
+.submit-btn:hover { background: #f5c800; }
+.submit-btn:disabled { opacity: 0.4; cursor: default; }
+.eval-btn {
+  display: none;
+  margin-top: 1rem;
+  padding: 12px 32px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 800;
+  font-family: 'Nunito', sans-serif;
+  text-decoration: none;
+  background: #1d9e75;
+  color: #ffffff;
+}
+.eval-btn:hover { background: #0f6e56; color: #ffffff; }
+.eval-btn.show {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #1d9e75 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.score-box { padding: 10px 20px; border-radius: 50px; font-size: 15px; font-weight: 800; display: none; font-family: 'Nunito', sans-serif; }
+.score-box.show { display: block; }
+.fb-text { font-size: 13px; color: #6b7280; margin-top: 0.75rem; font-style: italic; display: none; }
+
+.timer-bar-wrap { margin: 0 0 1.5rem; }
+.timer-info { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+.timer-label { font-size: 13px; color: #a0a8c0; font-weight: 600; }
+.timer-countdown { font-size: 18px; font-weight: 800; color: #ffd700; font-family: 'Nunito', sans-serif; }
+.timer-countdown.urgent { color: #ef5350; }
+.timer-bg { width: 100%; height: 6px; background: #2e2e4a; border-radius: 3px; }
+.timer-fill { height: 6px; background: #ffd700; border-radius: 3px; transition: width 1s linear; }
+.timer-fill.urgent { background: #ef5350; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div style="margin-bottom: 2rem; background: #2e2e4a; border-radius: 14px; padding: 1.25rem 1.5rem; border-left: 4px solid #ff6b35;">
+    <p style="font-size: 14px; line-height: 1.8; color: #c8c0e0; font-family: 'Nunito', sans-serif; font-weight: 600;">
+      Take two minutes to read the questions and answers in this exercise. After that, open the video in a separate tab and complete questions 1–8. After that, listen to the video one more time and complete questions 9–16.<br><br>
+      Click <strong style="color:#ffd700">Check answers</strong> when you are finished and proceed to the next part.
+    </p>
+  </div>
+  <div class="timer-bar-wrap" id="timer-wrap">
+    <div class="timer-info">
+      <span class="timer-label">Time remaining</span>
+      <span class="timer-countdown" id="timer-display">40:00</span>
+    </div>
+    <div class="timer-bg"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+  </div>
+
+  <div class="hero">
+    <h1>A.I. — Humanity's Final Invention?</h1>
+    <p>Watch the Kurzgesagt video, then answer the questions below.<br></p>
+    <a class="watch-all" href="https://www.youtube.com/watch?v=fa8k8IQ1_X0" target="_blank" rel="noopener">&#9654; Watch on YouTube</a>
+    <a class="nav-link" href="index.html">&#8592; Back to welcome</a>
+  </div>
+</div>
+<div class="section-header">
+    <span class="section-badge">Part A</span>
+    <div class="section-line"></div>
+    <span style="font-size:13px;color:#6b7280;white-space:nowrap">Multiple choice</span>
+  </div>
+  <p class="section-desc">Choose the best answer for each question.</p>
+  <div id="mc-area"></div>
+
+  <div class="section-header">
+    <span class="section-badge blue">Part B</span>
+    <div class="section-line"></div>
+    <span style="font-size:13px;color:#6b7280;white-space:nowrap">True / False / Not given</span>
+  </div>
+  <p class="section-desc">Decide whether each statement is True, False, or Not given based on the video.</p>
+  <div id="tfng-area"></div>
+
+  <div class="submit-row">
+    <button class="submit-btn" id="sub-btn">Check answers</button>
+    <div class="score-box" id="score-box"></div>
+  </div>
+  <p class="fb-text" id="fb-text"></p>
+  <a class="eval-btn" id="eval-btn" href="reading_test_1.html">Proceed to Reading Test 1 &#8594;</a>
+</div>
+
+<script>
+const VID = 'fa8k8IQ1_X0';
+function yt(t) { return 'https://www.youtube.com/watch?v=' + VID + '&t=' + t + 's'; }
+function ts(t) { return Math.floor(t/60) + ':' + String(t%60).padStart(2,'0'); }
+
+function forceColor(el, fg, bg) {
+  el.style.setProperty('color', fg, 'important');
+  el.style.setProperty('-webkit-text-fill-color', fg, 'important');
+  if (bg) el.style.setProperty('background-color', bg, 'important');
+}
+
+const mc = [
+  { at:19,  q:'What is the main definition of intelligence given in the video?', opts:['The ability to build tools and control fire','The ability to learn, reason, acquire knowledge and solve problems','The ability to communicate in large groups','The ability to survive competition in nature'], ans:1 },
+  { at:37,  q:'Why did most animals in nature not develop complex intelligence?', opts:['They lacked the right physical brain structure','Brains consume too much energy relative to their benefit','Their environments were too stable','Other species blocked their development'], ans:1 },
+  { at:49,  q:'Approximately when did the earliest brains appear?', opts:['250 million years ago','2 million years ago','500 million years ago','7 billion years ago'], ans:2 },
+  { at:93,  q:'What made homo erectus stand out from earlier species?', opts:['They were the first to walk upright','They saw the world as something to be understood and transformed','They developed the largest brains in history','They were the first to live in large social groups'], ans:1 },
+  { at:168, q:'What happened in 1997 that demonstrated AI could surpass human ability?', opts:['An AI drove a robot on Mars','An AI began recommending YouTube videos','An AI defeated the world chess champion','An AI identified faces with 97% accuracy'], ans:2 },
+  { at:220, q:'How do self-learning neural networks improve themselves?', opts:['Programmers manually update all their rules','They use machine learning to write and improve their own code','Scientists model them directly on human brain scans','They learn exclusively by watching humans perform tasks'], ans:1 },
+  { at:236, q:'What does the speaker describe as "scary" about modern neural networks?', opts:['They are already faster than humans at every task','We do not fully understand what happens inside them','They have already replaced millions of workers','They can access any information on the internet'], ans:1 },
+  { at:316, q:'What key limitation does the video say ChatGPT still has?', opts:['It can only work in English','It does not truly understand what it writes','It cannot summarise or translate text','It is slower than earlier AI systems'], ans:1 },
+  { at:510, q:'Which positive outcome of AGI does the video mention?', opts:['Replacing every human government within a decade','Solving scientific questions such as dark energy and curing ageing','Guaranteeing world peace through surveillance','Giving every person on Earth equal access to wealth'], ans:1 },
+  { at:573, q:'What could trigger an "intelligence explosion", according to the video?', opts:['Humans upgrading their own biological brains','The internet connecting all computers into one system','AGI becoming smart enough to improve AI research on its own','Governments investing unlimited money in computing'], ans:2 },
+];
+
+const tfng = [
+  { at:37,  q:'The video says that for most animals, a narrow intelligence was enough for survival.', ans:'True' },
+  { at:105, q:'Homo sapiens emerged approximately 250,000 years ago.', ans:'True' },
+  { at:143, q:'The video states that progress in AI research was always continuous with no pauses.', ans:'False' },
+  { at:233, q:'In 2018, a self-learning AI taught itself chess in four hours by playing against itself.', ans:'True' },
+  { at:355, q:'The video claims ChatGPT scored the highest ever result on every individual benchmark.', ans:'False' },
+  { at:430, q:'The video mentions a specific law passed by a government to regulate AGI development.', ans:'Not given' },
+  { at:493, q:'According to the video, AGI could theoretically be copied and run as multiple parallel instances.', ans:'True' },
+  { at:568, q:'The video says human cognitive software has improved significantly since early homo sapiens.', ans:'False' },
+];
+
+const letters = ['A','B','C','D'];
+const mcSel = new Array(mc.length).fill(null);
+const tfngSel = new Array(tfng.length).fill(null);
+
+const mcArea = document.getElementById('mc-area');
+mc.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'q-block';
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.innerHTML = '<div class="q-num">Question ' + (i+1) + '</div><div class="q-top"><div class="q-text">' + item.q + '</div></div>';
+  const opts = document.createElement('div');
+  opts.className = 'options';
+  opts.id = 'mc-' + i;
+  item.opts.forEach((o, j) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.dataset.j = j;
+    const ltr = document.createElement('div');
+    ltr.className = 'opt-ltr';
+    ltr.textContent = letters[j];
+    forceColor(ltr, '#ffffff', '#3a3a5c');
+    const txt = document.createElement('span');
+    txt.className = 'opt-txt';
+    txt.textContent = o;
+    forceColor(txt, '#e0e4f0', null);
+    btn.appendChild(ltr);
+    btn.appendChild(txt);
+    btn.addEventListener('click', () => {
+      mcSel[i] = j;
+      opts.querySelectorAll('.opt').forEach((b, k) => {
+        const l = b.querySelector('.opt-ltr');
+        const t = b.querySelector('.opt-txt');
+        if (k === j) { b.classList.add('selected'); forceColor(l, '#0d2033', '#4fc3f7'); forceColor(t, '#e8f6fd', null); }
+        else { b.classList.remove('selected'); forceColor(l, '#ffffff', '#3a3a5c'); forceColor(t, '#e0e4f0', null); }
+      });
+    });
+    opts.appendChild(btn);
+  });
+  card.appendChild(opts);
+  div.appendChild(card);
+  mcArea.appendChild(div);
+});
+
+const tfngArea = document.getElementById('tfng-area');
+tfng.forEach((item, i) => {
+  const div = document.createElement('div');
+  div.className = 'q-block';
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.innerHTML = '<div class="q-num">Question ' + (mc.length+i+1) + '</div><div class="q-top"><div class="q-text">' + item.q + '</div></div>';
+  const row = document.createElement('div');
+  row.className = 'tfng-row';
+  row.id = 'tfng-' + i;
+  ['True','False','Not given'].forEach(v => {
+    const btn = document.createElement('button');
+    btn.className = 'topt';
+    btn.dataset.v = v;
+    btn.textContent = v;
+    forceColor(btn, '#c0c8e0', '#12122a');
+    btn.addEventListener('click', () => {
+      tfngSel[i] = v;
+      row.querySelectorAll('.topt').forEach(b => {
+        if (b.dataset.v === v) { b.classList.add('selected'); forceColor(b, '#e8f6fd', '#0d2033'); }
+        else { b.classList.remove('selected'); forceColor(b, '#c0c8e0', '#12122a'); }
+      });
+    });
+    row.appendChild(btn);
+  });
+  card.appendChild(row);
+  div.appendChild(card);
+  tfngArea.appendChild(div);
+});
+
+document.getElementById('sub-btn').addEventListener('click', () => {
+  let score = 0;
+  mc.forEach((item, i) => {
+    document.querySelectorAll('#mc-' + i + ' .opt').forEach((btn, j) => {
+      btn.disabled = true;
+      const ltr = btn.querySelector('.opt-ltr');
+      const txt = btn.querySelector('.opt-txt');
+      if (j === item.ans) { btn.classList.add('show-correct'); forceColor(ltr, '#0a1f0c', '#66bb6a'); forceColor(txt, '#c8e6c9', null); }
+      if (j === mcSel[i]) {
+        btn.classList.remove('selected');
+        if (j === item.ans) { btn.classList.add('correct'); forceColor(ltr, '#0a1f0c', '#66bb6a'); forceColor(txt, '#c8e6c9', null); score++; }
+        else { btn.classList.add('wrong'); forceColor(ltr, '#ffffff', '#ef5350'); forceColor(txt, '#ffcdd2', null); }
+      }
+    });
+  });
+  tfng.forEach((item, i) => {
+    document.querySelectorAll('#tfng-' + i + ' .topt').forEach(btn => {
+      btn.disabled = true;
+      if (btn.dataset.v === item.ans) { btn.classList.add('show-correct'); forceColor(btn, '#c8e6c9', '#0a1f0c'); }
+      if (btn.dataset.v === tfngSel[i]) {
+        btn.classList.remove('selected');
+        if (btn.dataset.v === item.ans) { btn.classList.add('correct'); forceColor(btn, '#c8e6c9', '#0a1f0c'); score++; }
+        else { btn.classList.add('wrong'); forceColor(btn, '#ffcdd2', '#1f0a0a'); }
+      }
+    });
+  });
+  const total = mc.length + tfng.length;
+  const pct = Math.round((score / total) * 100);
+  const box = document.getElementById('score-box');
+  box.textContent = score + ' / ' + total + '  (' + pct + '%)';
+  box.classList.add('show');
+  if (pct >= 75) { forceColor(box, '#c8e6c9', '#0a1f0c'); box.style.setProperty('border', '1.5px solid #66bb6a', 'important'); }
+  else if (pct >= 50) { forceColor(box, '#ffe082', '#1e1200'); box.style.setProperty('border', '1.5px solid #ffd700', 'important'); }
+  else { forceColor(box, '#ffcdd2', '#1f0a0a'); box.style.setProperty('border', '1.5px solid #ef5350', 'important'); }
+  const fb = document.getElementById('fb-text');
+  fb.style.display = 'block';
+  fb.textContent = pct >= 75 ? 'Excellent — strong comprehension of the video.' : pct >= 50 ? 'Good effort. Review the highlighted questions and try again.' : 'Keep practising. The correct answers are highlighted in green.';
+  document.getElementById('sub-btn').disabled = true;
+  const evalBtn = document.getElementById('eval-btn');
+  evalBtn.classList.add('show');
+  evalBtn.style.setProperty('display', 'inline-flex', 'important');
+  evalBtn.style.setProperty('background-color', '#1d9e75', 'important');
+  evalBtn.style.setProperty('color', '#ffffff', 'important');
+  evalBtn.style.setProperty('-webkit-text-fill-color', '#ffffff', 'important');
+  evalBtn.style.setProperty('padding', '12px 32px', 'important');
+  evalBtn.style.setProperty('border-radius', '50px', 'important');
+  evalBtn.style.setProperty('font-size', '15px', 'important');
+  evalBtn.style.setProperty('font-weight', '800', 'important');
+  evalBtn.style.setProperty('text-decoration', 'none', 'important');
+  evalBtn.style.setProperty('border', 'none', 'important');
+  evalBtn.style.setProperty('align-items', 'center', 'important');
+  evalBtn.style.setProperty('gap', '8px', 'important');
+});
+
+const TOTAL_SECS = 40 * 60;
+let secsLeft = TOTAL_SECS;
+const timerInterval = setInterval(() => {
+  secsLeft--;
+  const m = Math.floor(secsLeft / 60);
+  const s = secsLeft % 60;
+  const disp = document.getElementById('timer-display');
+  const fill = document.getElementById('timer-fill');
+  if (disp) disp.textContent = m + ':' + String(s).padStart(2,'0');
+  if (fill) fill.style.width = Math.round((secsLeft / TOTAL_SECS) * 100) + '%';
+  if (secsLeft <= 60) {
+    if (disp) disp.classList.add('urgent');
+    if (fill) fill.classList.add('urgent');
+  }
+  if (secsLeft <= 0) {
+    clearInterval(timerInterval);
+    if (!document.getElementById('sub-btn').disabled) {
+      document.getElementById('sub-btn').click();
+    }
+  }
+}, 1000);
+</script>
+</body>
+</html>
